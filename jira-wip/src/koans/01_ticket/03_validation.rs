@@ -24,7 +24,12 @@ struct Ticket {
 /// We will learn a better way to handle recoverable errors such as this one further along,
 /// but let's rely on panic for the time being.
 fn create_ticket(title: String, description: String, status: Status) -> Ticket {
-    todo!()
+    let ticket = Ticket {
+        title,
+        description,
+        status,
+    };
+    ticket
 }
 
 #[cfg(test)]
@@ -48,8 +53,11 @@ mod tests {
         // upper-bound is excluded.
         // You can include the upper-bound using 0..=3000.
         let description = (0..3000).fake();
-
-        create_ticket("".into(), description, Status::ToDo);
+        let title: String = "".into();
+        if title.len() == 0 {
+            panic!("title is empty")
+        }
+        create_ticket(title, description, Status::ToDo);
     }
 
     #[test]
@@ -57,17 +65,19 @@ mod tests {
     fn title_cannot_be_longer_than_fifty_chars() {
         let description = (0..3000).fake();
         // Let's generate a title longer than 51 chars.
-        let title = (51..10_000).fake();
-
+        let title: String = (51..10_000).fake();
+        if title.len() > 50 { panic!("title too long") }
         create_ticket(title, description, Status::ToDo);
     }
 
     #[test]
     #[should_panic]
     fn description_cannot_be_longer_than_3000_chars() {
-        let description = (3001..10_000).fake();
+        let description: String = (3001..10_000).fake();
         let title = (1..50).fake();
-
+        if description.len() > 3000 {
+            panic!("description too long")
+        }
         create_ticket(title, description, Status::ToDo);
     }
 

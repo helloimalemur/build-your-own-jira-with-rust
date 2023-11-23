@@ -25,12 +25,15 @@ struct Ticket {
 /// Let's create a variant for each of the allowed statuses of our tickets.
 pub enum Status {
     ToDo,
-    __
+    InProgress,
+    Blocked,
+    Done
 }
 
 
 #[cfg(test)]
 mod tests {
+    use crate::path_to_enlightenment::status::Status::Blocked;
     use super::*;
 
     #[test]
@@ -39,7 +42,7 @@ mod tests {
         let ticket = Ticket {
             title: "A ticket title".into(),
             description: "A heart-breaking description".into(),
-            status: __
+            status: Blocked
         };
 
         // Let's check that the status corresponds to what we expect.
