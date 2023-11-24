@@ -13,6 +13,7 @@ paw = "1"
 directories = "2"
 serde = { version = "1", features = ["derive"] }
 serde_yaml = "0.8"
+rand = { version = "0.7.3", features = [] }
 
 [dev-dependencies]
 fake = "2"

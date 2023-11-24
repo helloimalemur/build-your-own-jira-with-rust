@@ -229,6 +229,7 @@ dependencies = [
  "directories",
  "fake",
  "paw",
+ "rand",
  "serde",
  "serde_yaml",
  "structopt",

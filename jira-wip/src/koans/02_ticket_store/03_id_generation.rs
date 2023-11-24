@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use rand::random;
 use super::recap::Ticket;
 
 /// Let's define a type-alias for our ticket id.
@@ -19,6 +20,7 @@ pub type TicketId = u32;
 // Feel free to add more fields to `TicketStore` to solve this koan!
 struct TicketStore {
     data: HashMap<TicketId, Ticket>,
+    id: TicketId,
 }
 
 impl TicketStore {
@@ -26,6 +28,7 @@ impl TicketStore {
     {
         TicketStore {
             data: HashMap::new(),
+            id: 0,
         }
     }
 
@@ -55,8 +58,9 @@ impl TicketStore {
         self.data.get(id)
     }
 
-    fn generate_id(__) -> TicketId {
-        todo!()
+    fn generate_id(&mut self) -> TicketId {
+        self.id += 1;
+        self.id
     }
 }
 

@@ -23,3 +23,18 @@ mod traits;
 #[path = "koans/01_ticket/07_derive.rs"]
 mod derive;
 
+#[path = "koans/01_ticket/08_recap.rs"]
+mod recap;
+
+#[path = "koans/02_ticket_store/01_store.rs"]
+mod store;
+
+#[path = "koans/02_ticket_store/02_option.rs"]
+mod option;
+
+#[path = "koans/02_ticket_store/03_id_generation.rs"]
+mod id_generation;
+
+#[path = "koans/02_ticket_store/04_metadata.rs"]
+mod metadata;
+
