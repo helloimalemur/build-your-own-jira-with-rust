@@ -6,12 +6,13 @@ use super::recap::Status;
 /// See:
 /// - https://en.wikipedia.org/wiki/Coordinated_Universal_Time
 /// - https://docs.rs/chrono/0.4.11/chrono/
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Local, Utc};
 use std::collections::HashMap;
 
 struct TicketStore {
     data: HashMap<TicketId, Ticket>,
     current_id: TicketId,
+    date_created: Option<DateTime<Utc>>,
 }
 
 /// When we retrieve a ticket we saved, we'd like to receive with it a bunch of metadata:
@@ -26,6 +27,7 @@ impl TicketStore {
         TicketStore {
             data: HashMap::new(),
             current_id: 0,
+            date_created: Some(Utc::now())
         }
     }
 
@@ -50,6 +52,7 @@ pub struct Ticket {
     title: String,
     description: String,
     status: Status,
+    date_created: Option<DateTime<Utc>>
 }
 
 impl Ticket {
@@ -66,13 +69,13 @@ impl Ticket {
     }
 
     // The datetime when the ticket was saved in the store, if it was saved.
-    pub fn created_at(&self) -> __ {
-        todo!()
+    pub fn created_at(&self) -> Option<DateTime<Utc>> {
+        self.date_created
     }
 
     // The id associated with the ticket when it was saved in the store, if it was saved.
-    pub fn id(&self) -> __ {
-        todo!()
+    pub fn id(&self) -> Option<&u32> {
+        self.id()
     }
 }
 
@@ -91,6 +94,7 @@ pub fn create_ticket(title: String, description: String, status: Status) -> Tick
         title,
         description,
         status,
+        date_created: Some(Utc::now()),
     }
 }
 
